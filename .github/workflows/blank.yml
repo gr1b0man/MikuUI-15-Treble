@@ -1,32 +1,11 @@
-name: CI 
+name: GSI 
 
 on:
 workflow_dispatch: 
 
 jobs:
 build:
-runs-on: ubuntu-latest 
-
+runs-on: ubuntu-latest
 steps:
-
-* name: Checkout repository
-uses: actions/checkout@v4
-* name: Free Disk Space
-run: |
-sudo rm -rf /usr/share/dotnet
-sudo rm -rf /usr/local/lib/android
-sudo rm -rf /opt/ghc
-sudo rm -rf "/usr/local/share/boost"
-* name: Install Dependencies
-run: |
-sudo apt update
-sudo apt install -y git-core gnupg flex bison build-essential zip curl zlib1g-dev lib32ncurses-dev lib32z1-dev libgl1-mesa-dev libxml2-utils xsltproc unzip fontconfig bc
-* name: Run Build Script
-run: |
-chmod +x build.sh
-./build.sh
-* name: Upload Artifact
-uses: actions/upload-artifact@v4
-with:
-name: MikuUI-15-GSI
-path: ./*.img
+- uses: actions/checkout@v4
+- run: chmod +x build.sh && ./build.sh
